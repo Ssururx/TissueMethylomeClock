@@ -29,5 +29,11 @@ The workflow is organized into separate scripts to keep the data clear and manag
 
 ---
 
+###  Key Tasks Completed
+* **Standardized Ages:** Converted all age data into numerical years so the model can read them.
+* **Filtered Controls:** Removed any samples with known diseases to ensure I am modeling healthy aging.
+* **Platform Alignment:** Verified that all samples use the Illumina 450K platform for consistency.
+
+All data is cleaned and saved, making it ready for **Step 2: Quality Control**.
 
 
