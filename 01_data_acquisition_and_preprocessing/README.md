@@ -12,5 +12,22 @@ I am using data from four different studies as of now to look at how the human b
 | **Total** | | **1,657** | |
 
 ---
+### Script Explanations
+
+The workflow is organized into separate scripts to keep the data clear and manageable, and especially because of the vast size of the files.
+* **Fetching (`fetch_*.py`)**  
+  * These scripts download the raw data and metadata from GEO and save them in a usable format.  
+  * I also check the files to ensure everything is downloaded and structured correctly.
+
+* **Extraction (`extract_*.py`)**  
+  * These scripts filter the datasets to retain only the desired samples.  
+  * For example, in the Brain dataset (GSE74193), I select only the healthy control samples.
+
+* **Inspecting & Merging (`inspect_*.py` & `merge_*.py`)**  
+  * **Inspect:** These scripts allow viewing the formatting of files without loading the entire dataset.  
+  * **Merge:** For the Blood datasets, this script combines three studies into one unified dataset (1,322 samples) for analysis.
+
+---
+
 
 
