@@ -30,4 +30,4 @@ Since I am working with two different tissues, I identified the **250 shared CpG
 * **Cleaned Metadata:** Corrected age labels and filtered sample lists.
 * **QC Reports:** A full summary of every sample removed and why.
 
-The data is fully cleaned and standardized. Making the project ready for **Step 3: Feature Selection**.
+The data is fully cleaned and standardize, making the project ready for **Step 3: Feature Selection**.
