@@ -18,7 +18,7 @@ This plot shows that our combined dataset covers almost the entire human lifespa
 
 #### 2. PCA Analysis (Principal Component Analysis)
 I used PCA to visualize the structure of the data. This helps confirm that the biological differences between tissues are being captured correctly before we start the modeling.
-![PCA Analysis](figures/pca_analysis.jpeg)
+![PCA Analysis](./figures/pca_analysis.jpeg)
 
 ---
 
