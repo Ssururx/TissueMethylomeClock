@@ -1,4 +1,4 @@
-# Epigenetic Aging Project: Step 2 – Quality Control & Data Cleaning
+# Step 2 – Quality Control & Data Cleaning
 
 This step focuses on "Quality Control" (QC). Before training a machine learning model, I have to ensure the DNA methylation data is clean, accurate, and free of technical errors.
 
