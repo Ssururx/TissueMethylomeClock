@@ -43,6 +43,7 @@ While I analyzed 50,000 CpGs in the brain and 1,670 in the blood, only 250 sites
 #### 1. Correlation Scatterplots
 These plots demonstrate the relationship between DNA methylation levels and chronological age for the top-ranked markers.
 ![Brain Top CpGs](figures/Brain_top_cpgs_scatter.png)
+![Blood Top CpGs](figures/Blood_top_cpgs_scatter.png)
 
 
 #### 2. TSI Distribution
@@ -57,4 +58,4 @@ This graph shows how the 250 shared CpGs are distributed across the specificity 
 * **top_500_blood_cpgs.csv**: The highest-performing markers for blood age prediction.
 * **universal_cpgs.csv**: 90 markers identified as potential candidates for a pan-tissue aging model.
 
-Now that feature discovery is complete, we can now move on to **Step 4: Machine Learning and Clock Training**.
+Now that feature discovery is complete, we can now move on to **Step 4: Epigenetic Clock Training**.
