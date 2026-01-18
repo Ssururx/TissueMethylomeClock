@@ -42,13 +42,13 @@ While I analyzed 50,000 CpGs in the brain and 1,670 in the blood, only 250 sites
 ### Key Visualizations
 #### 1. Correlation Scatterplots
 These plots demonstrate the relationship between DNA methylation levels and chronological age for the top-ranked markers in both tissues.
-![Brain Top CpGs](figures/Brain_top_cpgs_scatter.png)
-![Blood Top CpGs](figures/Blood_top_cpgs_scatter.png)
+![Brain Top CpGs](figures/Brain_top_cpgs_scatter.jpeg)
+![Blood Top CpGs](figures/Blood_top_cpgs_scatter.jpeg)
 
 
 #### 2. TSI Distribution
 This graph shows how the 250 shared CpGs are distributed across the specificity spectrum, highlighting the difference between systemic and localized aging.
-![Tissue Specificity](figures/tissue_specificity_analysis.png)
+![Tissue Specificity](figures/tissue_specificity_analysis.jpeg)
 
 ---
 
