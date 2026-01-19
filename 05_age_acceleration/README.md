@@ -47,4 +47,8 @@ This plot shows epigenetic age versus chronological age using LOWESS smoothing a
 * `brain_piecewise_regression.csv`: Statistical data on aging rate changes across life stages.
 * `age_acceleration_distributions.png`: Visualization of biological age variance in the population.
 
-Since biological aging phenotypes have been identified. The project is ready for **Step 6: Biological Pathway and Functional Analysis**.
+### Future Goals
+In the future, age acceleration from Step 5 could be correlated with available clinical metadata, such as gender. All current samples are healthy, and for GSE40279 656 samples (one of three blood datasets used as of now), gender information appears on the GSE page but could not be retrieved during data extraction, so this analysis is still a work in progress (WIP).
+
+
+Since biological aging phenotypes has been identified, we then continue on to **Step 6: Genomic Mapping (CpG-to-Gene)**.
