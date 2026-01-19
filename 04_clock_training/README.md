@@ -43,8 +43,8 @@ For the Blood model, the pre-selected 500 CpGs exhibited 100% stability, confirm
 ---
 
 ### Future Work and Next Steps
-* **Universal Clock:** I plan to develop a "Universal Clock" using the 90 universal CpGs identified via the Tissue Specificity Index (TSI) in Step 3. 
+* **Universal Clock:** I plan to develop a "Universal Clock" using the 35 universal CpGs identified via the Tissue Specificity Index (TSI) in Step 3. 
 * **External Validation:** To prove these models work on independent data, I am planning to validate the Brain clock using the **ROSMAP** dataset. External validation for the Blood clock is also planned as more datasets become available.
 * **Expanding Data:** I am actively looking for more samples for both tissues to further improve the model's precision and diversity.
 
-Training is now complete for the primary tissue-specific clocks, this enables us to move on to **Step 5: Residual Analysis and Age Acceleration**.
+Training is now complete for the primary tissue-specific clocks, this allows us to move on to **Step 5: Residual Analysis and Age Acceleration**.
