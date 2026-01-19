@@ -1,7 +1,5 @@
 """
 Epigenetics Project - Step 3: Feature Discovery with Universal Test Integration
-
-
 """
 
 # ----------------------------------------------------------------------------
@@ -813,7 +811,7 @@ def create_correlation_scatterplot(meth_df, meta_df, tissue_name, top_cpgs_df, o
     print(f"    ✓ Created correlation distribution plots for {tissue_name}")
 
 # ----------------------------------------------------------------------------
-# COMPLETE TISSUE SPECIFICITY INDEX (TSI) ANALYSIS
+# TISSUE SPECIFICITY INDEX (TSI) ANALYSIS
 # ----------------------------------------------------------------------------
 
 def calculate_tissue_specificity_index(brain_results, blood_results):
@@ -821,17 +819,24 @@ def calculate_tissue_specificity_index(brain_results, blood_results):
     Calculate Tissue Specificity Index (TSI) for CpGs common to both tissues
     """
     print("\n" + "="*80)
-    print("FORMAL TISSUE-SPECIFICITY METRIC (TSI) ANALYSIS")
+    print("TISSUE SPECIFICITY INDEX (TSI) ANALYSIS")
     print("="*80)
 
     print("\nCalculating Tissue Specificity Index (TSI)...")
-    print("Formula: TSI = 1 - |r_brain - r_blood| / max(|r_brain|, |r_blood|)")
-    print("\nInterpretation:")
-    print("  • TSI ≈ 1: Perfect tissue specificity (correlation in one tissue only)")
-    print("  • TSI ≈ 0: Universal aging signal (equal correlation in both tissues)")
-    print("  • TSI < 0.3: Universal aging CpGs")
-    print("  • TSI > 0.8: Tissue-locked CpGs")
-    print("  • 0.3 ≤ TSI ≤ 0.8: Intermediate specificity")
+    print("TSI is calculated using two components:")
+    print("1. Activity Score (A) = min(|r_brain|, |r_blood|)")
+    print("   • Captures whether a CpG exhibits meaningful age association in both tissues")
+    print("   • High A indicates shared aging signal across tissues")
+    
+    print("\n2. Concordance Score (C) = 1 - |r_brain - r_blood| / (|r_brain| + |r_blood|)")
+    print("   • Captures similarity in direction and magnitude of age-related changes")
+    print("   • High C indicates consistent aging dynamics between tissues")
+    
+    print("\nClassification Rules:")
+    print("  • Universal: A > 0.3 and C > 0.8")
+    print("  • Tissue-locked: A < 0.2")
+    print("  • Discordant: A > 0.3 and C < 0.3")
+    print("  • Intermediate/Modulated: Everything else")
 
     brain_all_results = brain_results['all_results']
     blood_all_results = blood_results['all_results']
@@ -857,21 +862,27 @@ def calculate_tissue_specificity_index(brain_results, blood_results):
 
         abs_brain = abs(r_brain)
         abs_blood = abs(r_blood)
-
-        if max(abs_brain, abs_blood) > 0:
-            tsi = 1 - (abs(abs_brain - abs_blood) / max(abs_brain, abs_blood))
+        
+        # Calculate Activity score (A)
+        A = min(abs_brain, abs_blood)
+        
+        # Calculate Concordance score (C)
+        if (abs_brain + abs_blood) > 0:
+            C = 1 - (abs(abs_brain - abs_blood) / (abs_brain + abs_blood))
         else:
-            tsi = 0.5
+            C = 0.5
 
-        # Classify based on TSI
-        if tsi > 0.8:
-            specificity_class = 'Tissue-Locked'
-        elif tsi < 0.3:
+        # Classify based on (A, C) framework
+        if A > 0.3 and C > 0.8:
             specificity_class = 'Universal'
+        elif A < 0.2:
+            specificity_class = 'Tissue-Locked'
+        elif A > 0.3 and C < 0.3:
+            specificity_class = 'Discordant'
         else:
             specificity_class = 'Intermediate'
 
-        # Determine dominant tissue
+        # Determine tissue with stronger signal
         if abs_brain > abs_blood:
             dominant_tissue = 'Brain'
         elif abs_blood > abs_brain:
@@ -885,23 +896,31 @@ def calculate_tissue_specificity_index(brain_results, blood_results):
             'Correlation_Blood': r_blood,
             'Abs_Correlation_Brain': abs_brain,
             'Abs_Correlation_Blood': abs_blood,
-            'TSI': tsi,
+            'Activity_Score_A': A,
+            'Concordance_Score_C': C,
             'Specificity_Class': specificity_class,
             'Dominant_Tissue': dominant_tissue,
             'Correlation_Difference': abs_brain - abs_blood
         })
 
     tsi_df = pd.DataFrame(tsi_results)
-    tsi_df = tsi_df.sort_values('TSI', ascending=False)
+    
+    # Sort by Activity score
+    tsi_df = tsi_df.sort_values('Activity_Score_A', ascending=False)
 
     save_table(tsi_df, 'tissue_specificity_index_results.csv', "TSI analysis results")
 
-    print(f"\nTSI Summary Statistics:")
-    print(f"  Mean TSI: {tsi_df['TSI'].mean():.3f}")
-    print(f"  Median TSI: {tsi_df['TSI'].median():.3f}")
-    print(f"  Std TSI: {tsi_df['TSI'].std():.3f}")
-    print(f"  Min TSI: {tsi_df['TSI'].min():.3f}")
-    print(f"  Max TSI: {tsi_df['TSI'].max():.3f}")
+    print(f"\nActivity (A) Score Summary:")
+    print(f"  Mean A: {tsi_df['Activity_Score_A'].mean():.3f}")
+    print(f"  Median A: {tsi_df['Activity_Score_A'].median():.3f}")
+    print(f"  Std A: {tsi_df['Activity_Score_A'].std():.3f}")
+    print(f"  Range A: {tsi_df['Activity_Score_A'].min():.3f} to {tsi_df['Activity_Score_A'].max():.3f}")
+
+    print(f"\nConcordance (C) Score Summary:")
+    print(f"  Mean C: {tsi_df['Concordance_Score_C'].mean():.3f}")
+    print(f"  Median C: {tsi_df['Concordance_Score_C'].median():.3f}")
+    print(f"  Std C: {tsi_df['Concordance_Score_C'].std():.3f}")
+    print(f"  Range C: {tsi_df['Concordance_Score_C'].min():.3f} to {tsi_df['Concordance_Score_C'].max():.3f}")
 
     class_counts = tsi_df['Specificity_Class'].value_counts()
     print(f"\nCpG Classification by Tissue Specificity:")
@@ -915,11 +934,11 @@ def calculate_tissue_specificity_index(brain_results, blood_results):
         percentage = (count / len(tsi_df)) * 100
         print(f"  {tissue}: {count:,} CpGs ({percentage:.1f}%)")
 
-    # Create comprehensive TSI visualizations
+    # Create comprehensive visualizations
     print("\nCreating TSI visualizations...")
     create_tsi_visualizations(tsi_df, len(common_cpgs))
 
-    # Advanced TSI analysis
+    # Advanced analysis
     print("\nAdvanced TSI Analysis...")
 
     correlation_diff = tsi_df['Correlation_Brain'] - tsi_df['Correlation_Blood']
@@ -929,17 +948,19 @@ def calculate_tissue_specificity_index(brain_results, blood_results):
     print(f"  Range: {correlation_diff.min():.3f} to {correlation_diff.max():.3f}")
 
     # Calculate correlation strength
-    tsi_df['Correlation_Strength'] = tsi_df['Abs_Correlation_Brain'] + tsi_df['Abs_Correlation_Blood']
-    tsi_df['Strength_Quartile'] = pd.qcut(tsi_df['Correlation_Strength'], 4,
+    tsi_df['Total_Correlation_Strength'] = tsi_df['Abs_Correlation_Brain'] + tsi_df['Abs_Correlation_Blood']
+    tsi_df['Strength_Quartile'] = pd.qcut(tsi_df['Total_Correlation_Strength'], 4,
                                          labels=['Q1 (Weakest)', 'Q2', 'Q3', 'Q4 (Strongest)'])
 
-    quartile_stats = tsi_df.groupby('Strength_Quartile')['TSI'].agg(['mean', 'std', 'count'])
-    print(f"\nTSI by Correlation Strength Quartile:")
+    quartile_stats = tsi_df.groupby('Strength_Quartile')[['Activity_Score_A', 'Concordance_Score_C']].agg(['mean', 'std', 'count'])
+    print(f"\nTSI Components by Correlation Strength Quartile:")
     print(quartile_stats)
 
     print(f"\nSaving classified CpGs for downstream analysis...")
     for cls in class_counts.index:
-        class_cpgs = tsi_df[tsi_df['Specificity_Class'] == cls][['CpG', 'TSI', 'Correlation_Brain', 'Correlation_Blood', 'Specificity_Class']]
+        class_cpgs = tsi_df[tsi_df['Specificity_Class'] == cls][['CpG', 'Activity_Score_A', 'Concordance_Score_C', 
+                                                               'Correlation_Brain', 'Correlation_Blood', 
+                                                               'Specificity_Class']]
         filename = f'{cls.lower().replace("-", "_")}_cpgs.csv'
         save_table(class_cpgs, filename, f"{cls} CpGs")
 
@@ -950,28 +971,39 @@ def calculate_tissue_specificity_index(brain_results, blood_results):
 
     universal_count = class_counts.get('Universal', 0)
     tissue_locked_count = class_counts.get('Tissue-Locked', 0)
+    discordant_count = class_counts.get('Discordant', 0)
     intermediate_count = class_counts.get('Intermediate', 0)
 
     print(f"\nKey Biological Insights:")
-    print(f"1. Tissue-Locked CpGs ({tissue_locked_count:,}):")
+    print(f"1. Universal CpGs ({universal_count:,}):")
+    print(f"   • Show strong age associations in both tissues (A > 0.3)")
+    print(f"   • Exhibit highly concordant aging dynamics (C > 0.8)")
+    print(f"   • Represent conserved aging mechanisms across tissues")
+    print(f"   • Ideal candidates for pan-tissue epigenetic clocks")
+
+    print(f"\n2. Tissue-Locked CpGs ({tissue_locked_count:,}):")
+    print(f"   • Show weak or absent age association in at least one tissue (A < 0.2)")
     print(f"   • Represent tissue-specific aging mechanisms")
     print(f"   • Strong candidates for tissue-specific epigenetic clocks")
     print(f"   • May reflect tissue-specific environmental exposures or cellular processes")
 
-    print(f"\n2. Universal CpGs ({universal_count:,}):")
-    print(f"   • Represent conserved aging mechanisms across tissues")
-    print(f"   • Good candidates for pan-tissue epigenetic clocks")
-    print(f"   • May reflect systemic aging processes (inflammation, oxidative stress)")
+    print(f"\n3. Discordant CpGs ({discordant_count:,}):")
+    print(f"   • Show strong age associations in both tissues (A > 0.3)")
+    print(f"   • Exhibit opposing or divergent aging dynamics (C < 0.3)")
+    print(f"   • May represent compensatory mechanisms or tissue-specific responses")
+    print(f"   • Particularly interesting for understanding tissue-specific aging rates")
 
-    print(f"\n3. Intermediate CpGs ({intermediate_count:,}):")
+    print(f"\n4. Intermediate CpGs ({intermediate_count:,}):")
     print(f"   • Show partial tissue specificity")
     print(f"   • May represent aging processes with tissue-specific modulation")
-    print(f"   • Interesting for understanding tissue-specific aging rates")
+    print(f"   • Good candidates for understanding tissue-specific aging trajectories")
 
     print(f"\nSummary of Tissue Specificity:")
     print(f"  • {tissue_locked_count/len(tsi_df)*100:.1f}% of common CpGs are tissue-locked")
     print(f"  • {universal_count/len(tsi_df)*100:.1f}% of common CpGs are universal")
-    print(f"  • Mean TSI of {tsi_df['TSI'].mean():.3f} suggests {'moderate' if tsi_df['TSI'].mean() > 0.5 else 'low'} overall tissue specificity")
+    print(f"  • {discordant_count/len(tsi_df)*100:.1f}% of common CpGs show discordant aging patterns")
+    print(f"  • Mean Activity (A) of {tsi_df['Activity_Score_A'].mean():.3f} indicates {'strong' if tsi_df['Activity_Score_A'].mean() > 0.3 else 'moderate' if tsi_df['Activity_Score_A'].mean() > 0.2 else 'weak'} shared aging signals")
+    print(f"  • Mean Concordance (C) of {tsi_df['Concordance_Score_C'].mean():.3f} indicates {'high' if tsi_df['Concordance_Score_C'].mean() > 0.7 else 'moderate' if tsi_df['Concordance_Score_C'].mean() > 0.5 else 'low'} consistency in aging dynamics")
 
     # Recommendations for Step 4
     print("\n" + "="*80)
@@ -981,13 +1013,15 @@ def calculate_tissue_specificity_index(brain_results, blood_results):
     print(f"\nBased on TSI analysis:")
     print(f"1. For Brain-specific clock: Prioritize Tissue-Locked CpGs with Brain dominance")
     print(f"2. For Blood-specific clock: Prioritize Tissue-Locked CpGs with Blood dominance")
-    print(f"3. For pan-tissue clock: Focus on Universal CpGs")
-    print(f"4. Consider excluding Intermediate CpGs for cleaner tissue-specific models")
+    print(f"3. For pan-tissue clock: Focus on Universal CpGs (A > 0.3 and C > 0.8)")
+    print(f"4. For understanding tissue-specific aging: Study Discordant CpGs (A > 0.3 and C < 0.3)")
+    print(f"5. Consider including Intermediate CpGs for comprehensive models")
 
     print(f"\nSuggested approach:")
     print(f"  • Train separate Brain and Blood clocks using tissue-locked CpGs")
-    print(f"  • Compare performance with clocks using all CpGs")
-    print(f"  • Use TSI as a feature selection criterion")
+    print(f"  • Develop a pan-tissue clock using universal CpGs")
+    print(f"  • Compare performance across different CpG classes")
+    print(f"  • Use TSI components as feature selection criteria")
 
     return tsi_df
 
@@ -997,101 +1031,114 @@ def create_tsi_visualizations(tsi_df, n_common_cpgs):
     """
     fig, axes = plt.subplots(2, 3, figsize=(18, 12))
 
-    # 1. TSI distribution histogram
-    axes[0, 0].hist(tsi_df['TSI'], bins=30, alpha=0.7, color='steelblue', edgecolor='black')
-    axes[0, 0].axvline(x=0.3, color='green', linestyle='--', alpha=0.7, label='Universal threshold')
-    axes[0, 0].axvline(x=0.8, color='red', linestyle='--', alpha=0.7, label='Tissue-Locked threshold')
-    axes[0, 0].set_xlabel('Tissue Specificity Index (TSI)', fontweight='bold')
-    axes[0, 0].set_ylabel('Frequency', fontweight='bold')
-    axes[0, 0].set_title('Distribution of Tissue Specificity', fontweight='bold')
-    axes[0, 0].legend()
+    # 1. Activity-Concordance scatter plot
+    colors = {'Universal': 'green', 'Tissue-Locked': 'red', 'Discordant': 'purple', 'Intermediate': 'orange'}
+    for cls in colors.keys():
+        mask = tsi_df['Specificity_Class'] == cls
+        if mask.sum() > 0:
+            axes[0, 0].scatter(tsi_df.loc[mask, 'Activity_Score_A'], 
+                             tsi_df.loc[mask, 'Concordance_Score_C'],
+                             alpha=0.6, s=30, color=colors[cls], label=cls)
+    
+    axes[0, 0].axhline(y=0.8, color='green', linestyle='--', alpha=0.7, label='Universal threshold (C > 0.8)')
+    axes[0, 0].axhline(y=0.3, color='purple', linestyle='--', alpha=0.7, label='Discordant threshold (C < 0.3)')
+    axes[0, 0].axvline(x=0.3, color='blue', linestyle='--', alpha=0.7, label='Activity threshold (A > 0.3)')
+    axes[0, 0].axvline(x=0.2, color='red', linestyle='--', alpha=0.7, label='Tissue-locked threshold (A < 0.2)')
+    
+    axes[0, 0].set_xlabel('Activity Score (A = min(|r_brain|, |r_blood|))', fontweight='bold')
+    axes[0, 0].set_ylabel('Concordance Score (C)', fontweight='bold')
+    axes[0, 0].set_title('TSI: Activity vs Concordance', fontweight='bold')
+    axes[0, 0].legend(loc='upper right', fontsize=8)
     axes[0, 0].grid(alpha=0.3)
 
-    # 2. Correlation comparison scatter plot
-    sc = axes[0, 1].scatter(tsi_df['Correlation_Brain'], tsi_df['Correlation_Blood'],
-                            alpha=0.6, s=30, c=tsi_df['TSI'], cmap='viridis')
-    axes[0, 1].axhline(y=0, color='black', linestyle='-', alpha=0.3)
-    axes[0, 1].axvline(x=0, color='black', linestyle='-', alpha=0.3)
-    axes[0, 1].plot([-1, 1], [-1, 1], 'r--', alpha=0.5, label='Perfect agreement')
-    axes[0, 1].set_xlabel('Brain Correlation (r)', fontweight='bold')
-    axes[0, 1].set_ylabel('Blood Correlation (r)', fontweight='bold')
-    axes[0, 1].set_title('Correlation Comparison by Tissue', fontweight='bold')
-    axes[0, 1].set_xlim([-1, 1])
-    axes[0, 1].set_ylim([-1, 1])
+    # 2. Activity distribution
+    axes[0, 1].hist(tsi_df['Activity_Score_A'], bins=30, alpha=0.7, color='steelblue', edgecolor='black')
+    axes[0, 1].axvline(x=0.2, color='red', linestyle='--', alpha=0.7, label='Tissue-locked threshold')
+    axes[0, 1].axvline(x=0.3, color='blue', linestyle='--', alpha=0.7, label='Universal threshold')
+    axes[0, 1].set_xlabel('Activity Score (A)', fontweight='bold')
+    axes[0, 1].set_ylabel('Frequency', fontweight='bold')
+    axes[0, 1].set_title('Distribution of Activity Scores', fontweight='bold')
+    axes[0, 1].legend()
     axes[0, 1].grid(alpha=0.3)
-    plt.colorbar(sc, ax=axes[0, 1], label='TSI')
 
-    # 3. Classification pie chart
+    # 3. Concordance distribution
+    axes[0, 2].hist(tsi_df['Concordance_Score_C'], bins=30, alpha=0.7, color='darkorange', edgecolor='black')
+    axes[0, 2].axvline(x=0.3, color='purple', linestyle='--', alpha=0.7, label='Discordant threshold')
+    axes[0, 2].axvline(x=0.8, color='green', linestyle='--', alpha=0.7, label='Universal threshold')
+    axes[0, 2].set_xlabel('Concordance Score (C)', fontweight='bold')
+    axes[0, 2].set_ylabel('Frequency', fontweight='bold')
+    axes[0, 2].set_title('Distribution of Concordance Scores', fontweight='bold')
+    axes[0, 2].legend()
+    axes[0, 2].grid(alpha=0.3)
+
+    # 4. Classification pie chart
     class_counts = tsi_df['Specificity_Class'].value_counts()
-    colors = ['green', 'orange', 'red']  # Universal, Intermediate, Tissue-Locked
-    axes[0, 2].pie(class_counts.values, labels=class_counts.index,
-                  autopct='%1.1f%%', startangle=90, colors=colors)
-    axes[0, 2].set_title('CpG Classification by Tissue Specificity', fontweight='bold')
+    colors_pie = [colors.get(cls, 'gray') for cls in class_counts.index]
+    axes[1, 0].pie(class_counts.values, labels=class_counts.index,
+                   autopct='%1.1f%%', startangle=90, colors=colors_pie)
+    axes[1, 0].set_title('CpG Classification by TSI', fontweight='bold')
 
-    # 4. TSI vs correlation strength
-    tsi_df['Total_Correlation_Strength'] = tsi_df['Abs_Correlation_Brain'] + tsi_df['Abs_Correlation_Blood']
-    axes[1, 0].scatter(tsi_df['Total_Correlation_Strength'], tsi_df['TSI'],
-                      alpha=0.6, s=30, color='purple')
-    axes[1, 0].set_xlabel('Total Correlation Strength (|r_brain| + |r_blood|)', fontweight='bold')
-    axes[1, 0].set_ylabel('TSI', fontweight='bold')
-    axes[1, 0].set_title('TSI vs Correlation Strength', fontweight='bold')
-    axes[1, 0].grid(alpha=0.3)
-
-    # 5. Dominant tissue bar plot
-    dominant_counts = tsi_df['Dominant_Tissue'].value_counts()
-    colors_dom = ['blue', 'red', 'gray']  # Brain, Blood, Equal
-    bars = axes[1, 1].bar(range(len(dominant_counts)), dominant_counts.values,
-                         color=colors_dom[:len(dominant_counts)])
-    axes[1, 1].set_xlabel('Dominant Tissue', fontweight='bold')
-    axes[1, 1].set_ylabel('Number of CpGs', fontweight='bold')
-    axes[1, 1].set_title('Dominant Tissue Analysis', fontweight='bold')
-    axes[1, 1].set_xticks(range(len(dominant_counts)))
-    axes[1, 1].set_xticklabels(dominant_counts.index)
-    axes[1, 1].grid(axis='y', alpha=0.3)
-
-    # Add counts on bars
-    for bar, count in zip(bars, dominant_counts.values):
-        height = bar.get_height()
-        axes[1, 1].text(bar.get_x() + bar.get_width()/2., height + 0.5,
-                       f'{count}', ha='center', va='bottom', fontweight='bold')
+    # 5. Correlation comparison scatter plot (colored by classification)
+    for cls in colors.keys():
+        mask = tsi_df['Specificity_Class'] == cls
+        if mask.sum() > 0:
+            axes[1, 1].scatter(tsi_df.loc[mask, 'Correlation_Brain'], 
+                             tsi_df.loc[mask, 'Correlation_Blood'],
+                             alpha=0.6, s=30, color=colors[cls], label=cls)
+    
+    axes[1, 1].axhline(y=0, color='black', linestyle='-', alpha=0.3)
+    axes[1, 1].axvline(x=0, color='black', linestyle='-', alpha=0.3)
+    axes[1, 1].plot([-1, 1], [-1, 1], 'k--', alpha=0.5, label='Perfect agreement')
+    axes[1, 1].set_xlabel('Brain Correlation (r)', fontweight='bold')
+    axes[1, 1].set_ylabel('Blood Correlation (r)', fontweight='bold')
+    axes[1, 1].set_title('Correlation Comparison by TSI Classification', fontweight='bold')
+    axes[1, 1].set_xlim([-1, 1])
+    axes[1, 1].set_ylim([-1, 1])
+    axes[1, 1].legend(loc='upper left', fontsize=8)
+    axes[1, 1].grid(alpha=0.3)
 
     # 6. Summary statistics text
     axes[1, 2].axis('off')
     stats_text = f"TSI Analysis Summary:\n\n"
     stats_text += f"Common CpGs analyzed: {n_common_cpgs:,}\n\n"
-    stats_text += f"Mean TSI: {tsi_df['TSI'].mean():.3f}\n"
-    stats_text += f"Median TSI: {tsi_df['TSI'].median():.3f}\n"
-    stats_text += f"Std TSI: {tsi_df['TSI'].std():.3f}\n\n"
-
+    stats_text += f"Activity (A) Scores:\n"
+    stats_text += f"  Mean: {tsi_df['Activity_Score_A'].mean():.3f}\n"
+    stats_text += f"  Median: {tsi_df['Activity_Score_A'].median():.3f}\n"
+    stats_text += f"  Std: {tsi_df['Activity_Score_A'].std():.3f}\n\n"
+    
+    stats_text += f"Concordance (C) Scores:\n"
+    stats_text += f"  Mean: {tsi_df['Concordance_Score_C'].mean():.3f}\n"
+    stats_text += f"  Median: {tsi_df['Concordance_Score_C'].median():.3f}\n"
+    stats_text += f"  Std: {tsi_df['Concordance_Score_C'].std():.3f}\n\n"
+    
+    stats_text += f"Classification:\n"
     for cls, count in class_counts.items():
         percentage = (count / len(tsi_df)) * 100
-        stats_text += f"{cls}: {count:,} ({percentage:.1f}%)\n"
-
-    stats_text += f"\nDominant Tissue:\n"
-    for tissue, count in dominant_counts.items():
-        percentage = (count / len(tsi_df)) * 100
-        stats_text += f"{tissue}: {count:,} ({percentage:.1f}%)\n"
+        stats_text += f"  {cls}: {count:,} ({percentage:.1f}%)\n"
 
     axes[1, 2].text(0.02, 0.98, stats_text, transform=axes[1, 2].transAxes,
-                   fontsize=10, verticalalignment='top',
+                   fontsize=9, verticalalignment='top',
                    bbox=dict(boxstyle='round', facecolor='lightyellow', alpha=0.8))
 
-    plt.suptitle('Formal Tissue-Specificity Analysis (TSI)', fontsize=16, fontweight='bold', y=1.02)
+    plt.suptitle('Tissue Specificity Index (TSI) Analysis', 
+                 fontsize=16, fontweight='bold', y=1.02)
     plt.tight_layout()
     save_figure('tissue_specificity_analysis.png')
     plt.show()
 
-    # Additional visualization: TSI by correlation difference
+    # Additional visualization: Activity vs correlation difference
     plt.figure(figsize=(10, 6))
     correlation_diff = tsi_df['Correlation_Brain'] - tsi_df['Correlation_Blood']
-
-    plt.scatter(correlation_diff, tsi_df['TSI'], alpha=0.6, s=30, c='purple')
+    
+    plt.scatter(correlation_diff, tsi_df['Activity_Score_A'], alpha=0.6, s=30, 
+                c=tsi_df['Concordance_Score_C'], cmap='viridis')
     plt.axvline(x=0, color='black', linestyle='-', alpha=0.5)
-    plt.axhline(y=0.3, color='green', linestyle='--', alpha=0.7, label='Universal threshold')
-    plt.axhline(y=0.8, color='red', linestyle='--', alpha=0.7, label='Tissue-Locked threshold')
+    plt.axhline(y=0.3, color='blue', linestyle='--', alpha=0.7, label='Universal threshold (A > 0.3)')
+    plt.axhline(y=0.2, color='red', linestyle='--', alpha=0.7, label='Tissue-locked threshold (A < 0.2)')
     plt.xlabel('Correlation Difference (r_brain - r_blood)', fontweight='bold')
-    plt.ylabel('TSI', fontweight='bold')
-    plt.title('TSI vs Correlation Difference', fontweight='bold')
+    plt.ylabel('Activity Score (A)', fontweight='bold')
+    plt.title('Activity Score vs Correlation Difference\n(Colored by Concordance)', fontweight='bold')
+    plt.colorbar(label='Concordance Score (C)')
     plt.legend()
     plt.grid(alpha=0.3)
     plt.tight_layout()
@@ -1501,7 +1548,8 @@ def main():
             tsi_df = pd.read_csv(tsi_file)
             print(f"\nTSI Analysis Summary:")
             print(f"  • Common CpGs analyzed: {len(tsi_df):,}")
-            print(f"  • Mean TSI: {tsi_df['TSI'].mean():.3f}")
+            print(f"  • Mean Activity (A): {tsi_df['Activity_Score_A'].mean():.3f}")
+            print(f"  • Mean Concordance (C): {tsi_df['Concordance_Score_C'].mean():.3f}")
 
             class_counts = tsi_df['Specificity_Class'].value_counts()
             for cls, count in class_counts.items():
@@ -1509,12 +1557,15 @@ def main():
                 print(f"  • {cls}: {count:,} CpGs ({percentage:.1f}%)")
 
             print(f"\nBiological Interpretation:")
-            if 'Tissue-Locked' in class_counts.index:
-                print(f"  • {class_counts['Tissue-Locked']:,} CpGs show tissue-specific aging patterns")
-                print(f"  • These are ideal for tissue-specific epigenetic clocks")
             if 'Universal' in class_counts.index:
                 print(f"  • {class_counts['Universal']:,} CpGs show conserved aging across tissues")
-                print(f"  • These could form the basis of a pan-tissue clock")
+                print(f"  • These are ideal for pan-tissue epigenetic clocks")
+            if 'Tissue-Locked' in class_counts.index:
+                print(f"  • {class_counts['Tissue-Locked']:,} CpGs show tissue-specific aging")
+                print(f"  • These are ideal for tissue-specific epigenetic clocks")
+            if 'Discordant' in class_counts.index:
+                print(f"  • {class_counts['Discordant']:,} CpGs show divergent aging dynamics")
+                print(f"  • These reveal tissue-specific aging responses")
 
         brain_cpgs = set(tissue_results['Brain']['top_cpgs']['CpG'])
         blood_cpgs = set(tissue_results['Blood']['top_cpgs']['CpG'])
@@ -1542,8 +1593,8 @@ ANALYSIS OVERVIEW:
 -----------------
 This analysis identifies age-associated CpGs in Brain and Blood tissues using
 Pearson correlation with Benjamini-Hochberg FDR correction. Key innovation:
-Formal Tissue Specificity Index (TSI) analysis to quantify tissue-specific vs
-universal aging patterns.
+Tissue Specificity Index (TSI) analysis using Activity (A) and Concordance (C) scores
+to separate shared aging signals from tissue-specific dynamics.
 
 DATASETS:
 ---------
@@ -1570,14 +1621,25 @@ DATASETS:
 
 TISSUE SPECIFICITY INDEX (TSI) ANALYSIS:
 ---------------------------------------
-Formula: TSI = 1 - |r_brain - r_blood| / max(|r_brain|, |r_blood|)
+TSI Components:
 
-Interpretation:
-• TSI ≈ 1: Perfect tissue specificity (correlation in one tissue only)
-• TSI ≈ 0: Universal aging signal (equal correlation in both tissues)
-• TSI < 0.3: Universal aging CpGs
-• TSI > 0.8: Tissue-locked CpGs
-• 0.3 ≤ TSI ≤ 0.8: Intermediate specificity
+Activity Score (A):
+  Formula: A = min(|r_brain|, |r_blood|)
+  • Captures whether a CpG exhibits meaningful age association in both tissues
+  • High A (>0.3) indicates shared aging signal across tissues
+  • Low A (<0.2) indicates tissue-specific aging
+
+Concordance Score (C):
+  Formula: C = 1 - |r_brain - r_blood| / (|r_brain| + |r_blood|)
+  • Captures similarity in direction and magnitude of age-related changes
+  • High C (>0.8) indicates consistent aging dynamics between tissues
+  • Low C (<0.3) indicates discordant aging patterns
+
+Classification Rules:
+  • Universal: A > 0.3 and C > 0.8
+  • Tissue-locked: A < 0.2
+  • Discordant: A > 0.3 and C < 0.3
+  • Intermediate/Modulated: Everything else
 
 """
 
@@ -1591,7 +1653,8 @@ Interpretation:
 TSI RESULTS:
 ------------
 Common CpGs analyzed: {len(tsi_df):,}
-Mean TSI: {tsi_df['TSI'].mean():.3f}
+Mean Activity (A): {tsi_df['Activity_Score_A'].mean():.3f}
+Mean Concordance (C): {tsi_df['Concordance_Score_C'].mean():.3f}
 
 Classification:
 """
@@ -1609,20 +1672,24 @@ Classification:
 
 KEY BIOLOGICAL INSIGHTS:
 ------------------------
-1. Tissue Specificity:
-   • Most age-associated CpGs show tissue-specific patterns
-   • This supports the need for tissue-specific epigenetic clocks
+1. TSI Framework Advantages:
+   • Separates presence of aging signal (Activity) from tissue consistency (Concordance)
+   • Avoids conflating weak shared signals with tissue-restricted effects
+   • Improves biological interpretability of tissue specificity
+   • Aligns with best practices in high-impact epigenetics research
+
+2. Tissue Specificity Insights:
+   • Activity scores reveal which CpGs show meaningful age associations in both tissues
+   • Concordance scores reveal which CpGs show consistent aging dynamics
    • Tissue-locked CpGs represent tissue-specific aging biology
+   • Universal CpGs represent conserved aging mechanisms
+   • Discordant CpGs reveal tissue-specific aging responses
 
-2. Universal Aging Markers:
-   • Some CpGs show conserved aging patterns across tissues
-   • These may represent systemic aging processes
-   • Good candidates for pan-tissue clocks
-
-3. Correlation Patterns:
-   • Brain shows both positive and negative correlations with age
-   • Blood shows predominantly negative correlations
-   • Strongest correlations exceed |r| = 0.7 in both tissues
+3. Biological Interpretation:
+   • High Activity + High Concordance = Conserved aging mechanisms
+   • Low Activity = Tissue-specific aging processes
+   • High Activity + Low Concordance = Tissue-specific aging responses
+   • Intermediate scores = Modulated aging patterns
 
 EPIGENETIC CLOCK OVERLAP:
 -------------------------
@@ -1660,21 +1727,24 @@ Notes for Step 4:
 Feature selection based on TSI analysis
 
 Brain-specific clock:
-Select brain-dominant, tissue-locked CpGs with strong age correlations in brain tissue. CpGs with TSI > 0.8 are prioritized.
+Select brain-dominant, tissue-locked CpGs (A < 0.2, dominant in brain) with strong age correlations in brain tissue.
 
 Blood-specific clock:
-Select blood-dominant, tissue-locked CpGs with strong age correlations in blood. CpGs with TSI > 0.8 are prioritized.
+Select blood-dominant, tissue-locked CpGs (A < 0.2, dominant in blood) with strong age correlations in blood tissue.
 
 Pan-tissue clock:
-Use universal CpGs (TSI < 0.3) that show consistent age correlation across both tissues, prioritizing CpGs with high mean correlation.
+Use universal CpGs (A > 0.3 and C > 0.8) that show consistent age correlation across both tissues.
 
-- All correlations were computed using Pearson’s correlation.
+Discordant CpGs:
+These CpGs (A > 0.3 and C < 0.3) are particularly interesting for understanding tissue-specific aging responses and may inform tissue-specific clock development.
+
+- All correlations were computed using Pearson's correlation.
 
 - Multiple testing was controlled using FDR correction at a 5% threshold.
 
 - A minimum of 10 samples was required to calculate correlations.
 
-- TSI was used as a quantitative measure of tissue specificity.
+- TSI provides a robust framework for tissue specificity analysis.
 
 - These results guide feature selection for Step 4: Clock Training.
 
