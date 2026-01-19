@@ -20,7 +20,7 @@ is expected to improve with increased sample size and improved modeling of cellu
 
 ### Optimization Strategy
 To achieve these results, I performed a multi-stage optimization process:
-* **Feature Size Optimization:** Tested different numbers of CpGs to find the "sweet spot" where accuracy is highest without including unnecessary noise.
+* **Feature Size Optimization:** Tested different numbers of CpGs to find the best amount where accuracy is highest without including unnecessary noise.
 * **Hyperparameter Tuning:** Used a randomized search to find the best Alpha and L1 ratios for the ElasticNet models.
 * **Feature Stability Analysis:** Used 5-fold cross-validation to identify which CpGs were consistently selected across different groups of data. For the brain, 157 features were identified as extremely stable.
 * **Ensemble Learning:** Implemented a Bagging Ensemble (30-50 estimators) to reduce variance and improve the model's ability to work on new, unseen data.
@@ -34,9 +34,11 @@ This plot compares predicted age vs. actual age. The tight clustering along the 
 ![Blood Predictions](figures/blood_test_predictions.png)
 
 #### 2. Feature Stability
-This chart shows how many CpGs were consistently chosen by the model during cross-validation. High stability indicates that the model is picking up real biological signals.
+This chart shows how many CpGs were consistently chosen by the **Brain model** during cross-validation. High stability indicates that the model is picking up real biological signals. 
 ![Feature Stability](figures/brain_feature_stability_analysis.png)
-![Feature Stability](figures/blood_feature_stability_analysis.png)
+
+For the Blood model, the pre-selected 500 CpGs exhibited 100% stability, confirming that these markers provide a consistent and reliable foundation for age prediction. Feature selection was carefully optimized—testing different numbers of CpGs—to ensure the Blood Clock captures a true biological signal rather than overfitting to noise, maximizing predictive performance.
+
 
 ---
 
