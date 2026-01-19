@@ -30,12 +30,12 @@ To achieve these results, I performed a multi-stage optimization process:
 ### Key Visualizations
 #### 1. Prediction Accuracy 
 This plot compares predicted age vs. actual age. The tight clustering along the 45-degree line (representing ideal performance) shows the model is accurate across the entire lifespan.
-![Brain Predictions](figures/brain_test_predictions.png)
-![Blood Predictions](figures/blood_test_predictions.png)
+![Brain Predictions](figures/brain_test_predictions.jpeg)
+![Blood Predictions](figures/blood_test_predictions.jpeg)
 
 #### 2. Feature Stability
 This chart shows how many CpGs were consistently chosen by the **Brain model** during cross-validation. High stability indicates that the model is picking up real biological signals. 
-![Feature Stability](figures/brain_feature_stability_analysis.png)
+![Feature Stability](figures/brain_feature_stability_analysis.jpeg)
 
 For the Blood model, the pre-selected 500 CpGs exhibited 100% stability, confirming that these markers provide a consistent and reliable foundation for age prediction. Feature selection was carefully optimized—testing different numbers of CpGs—to ensure the Blood Clock captures a true biological signal rather than overfitting to noise, maximizing predictive performance.
 
