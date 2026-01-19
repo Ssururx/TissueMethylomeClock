@@ -28,7 +28,7 @@ Analysis of tissue-specific CpGs reveals distinct biological processes driving a
 
 ###  Key Visualization(s)
 * **Enrichment Heatmap:** A comparative visualization showing the strength of association ($-log_{10}$ adjusted p-value) for top pathways across all gene sets.
-![Pathway Enrichment Heatmap](figures/pathway_enrichment_heatmap.png)
+![Pathway Enrichment Heatmap](figures/pathway_enrichment_heatmap.jpeg)
 
 
 ---
