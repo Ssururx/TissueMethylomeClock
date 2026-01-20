@@ -43,7 +43,8 @@ To move beyond simple correlations, I implemented two advanced validation techni
 ![Blood Predictions](figures/blood_predictions.png)
 
 * **Bootstrap Distributions:** I created histograms showing the tight confidence intervals for the model's error rates, which gives me high confidence in the clock's reliability.
-
+![Brain Bootstrap Distributions](figures/brain_bootstraps_distributions.png)
+![Blood Bootstrap Distributions](figures/blood_bootstraps_distributions.png)
 ---
 
 ###  Key Outputs Created
