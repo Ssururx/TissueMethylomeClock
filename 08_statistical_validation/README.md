@@ -60,4 +60,4 @@ I generated scatter plots showing the high-fidelity alignment between chronologi
 
 ---
 
-**Next Step:** Now that I have statistically validated these models, I am moving on to **Step 9: Comprehensive Annotation and Gene Mapping**. This will allow me to perform a deeper dive into the functional genomic context of my findings.
+**Next Step:** Now that I have statistically validated these models, we can move on to **Step 9: Comprehensive Annotation and Gene Mapping**, allowing us to perform a deeper dive into the functional genomic context of the findings.
