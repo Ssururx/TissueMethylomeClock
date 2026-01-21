@@ -36,7 +36,10 @@ A major goal of this project is to discover aging markers that existing models m
 
 ###  Key Outputs Created
 * `novel_brain_genes.csv` & `novel_blood_genes.csv`: Lists of newly discovered genes for downstream analysis.
-* `shared_genes.csv`: The core 13 genes that may represent a universal aging "skeleton."
+* `shared_genes.csv`: The 13 genes shared between brain and blood, representing a potential core framework of tissue-independent aging.
 * `brain_cpg_gene_mapping.csv` & `blood_cpg_gene_mapping.csv`: Detailed tables connecting every CpG probe to its chromosome, position, and gene function.
+
+> **Note:** Here, "novel" or "unique" refers to genes that are **not included in the Horvath (2013) or Hannum (2013) epigenetic clocks**. It does **not** imply that these genes were previously unknown to science—only that they represent aging signals **distinct from those captured by the existing clocks**.
+
 
 Since the "biological translation" is complete, the project is then ready for **Step 7: Pathway Enrichment Analysis**.
