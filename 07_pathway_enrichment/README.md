@@ -43,7 +43,7 @@ Over **90%** of the genes in our models are not found in the Horvath or Hannum c
 * `novel_brain_enrichment_top50.csv`: The top 50 functional insights identified from previously overlooked brain genes.
 * `pathway_enrichment_heatmap_data.csv`: A machine-readable matrix of all biological pathway strengths.
 
-*Note:* **“Unique”** refers to genes detected exclusively in one tissue (e.g., brain) within our dataset, whereas **“Novel”** refers to genes that are absent from the Horvath and Hannum clocks, regardless of whether they are shared across tissues.
+> Note: **“Unique”** refers to genes detected exclusively in one tissue (e.g., brain) within our dataset, whereas **“Novel”** refers to genes that are absent from the Horvath and Hannum clocks, regardless of whether they are shared across tissues.
 
 
 The biological drivers of aging now have been identified and validated, this allows us to move on to **Step 8: Statistical Validation**.
