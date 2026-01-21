@@ -38,14 +38,20 @@ I analyzed how the clock performs across six different life stages.
 This plot shows the difference between predicted biological age and chronological age for all samples, illustrating the rate of biological aging across tissues in a single visualization.  
 ![Age Acceleration Distributions](figures/age_acceleration_distributions.jpeg)
 
-
 ### Nonlinear Aging Trajectories
-This plot shows epigenetic age versus chronological age using LOWESS smoothing and piecewise regression. It captures the nonlinear dynamics of aging, showing faster biological aging during early development and more stable rates in adulthood, with subtle differences between brain and blood.  
-![Nonlinear Aging Trajectories (Brain)](figures/brain_nonlinear_trajectories.jpeg)
+This plot shows epigenetic age versus chronological age using LOWESS smoothing and piecewise regression. It captures the nonlinear dynamics of aging, showing faster biological aging during early development and more stable rates in adulthood, with subtle differences between brain and blood.
 
----
+<table>
+<tr>
+<td align="center">
+<img src="figures/brain_nonlinear_trajectories.jpeg" alt="Nonlinear Aging Trajectories: Brain" width="300">
+</td>
+<td align="center">
+<img src="figures/blood_nonlinear_trajectories.jpeg" alt="Nonlinear Aging Trajectories: Blood" width="300">
+</td>
+</tr>
+</table>
 
-![Nonlinear Aging Trajectories (Blood)](figures/blood_nonlinear_trajectories.jpeg)
 
 
 ---
