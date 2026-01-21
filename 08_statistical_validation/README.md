@@ -41,9 +41,17 @@ To move beyond simple correlations, I implemented two advanced validation techni
 **Brain & Blood Prediction Plots:**  
 I generated scatter plots showing the high-fidelity alignment between chronological age and the age predicted by my AI models.
 
-![Brain Predictions](figures/brain_predictions.jpeg)
+<table>
+<tr>
+<td>
+<img src="figures/brain_predictions.jpeg" alt="Brain Predictions" width="300">
+</td>
+<td>
+<img src="figures/blood_predictions.jpeg" alt="Blood Predictions" width="300">
+</td>
+</tr>
+</table>
 
-![Blood Predictions](figures/blood_predictions.jpeg)
 
 
 * **Bootstrap Distributions:** I created histograms showing the tight confidence intervals for the model's error rates, which gives me high confidence in the clock's reliability.
