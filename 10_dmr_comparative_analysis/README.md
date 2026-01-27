@@ -67,6 +67,6 @@ This will prove that the markers aren't just random sites, but key players in an
 * `tissue_comparison_summary.txt`: A technical summary of DMR and gene body vs. promoter findings.
 
 **Current Status:** The comparative genomic landscape is now mapped, revealing a promoter-focused pattern of aging in blood versus a gene-body–focused pattern in the brain.
-Enabling us to move on to **Step 11: Enhanced Epigenetic Deconvolution and Causal Inference**
+Enabling us to move on to **Step 11: Latent Cellular Architecture and Causal Aging Dynamics**
 
 ---
