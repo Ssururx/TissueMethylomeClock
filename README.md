@@ -154,7 +154,7 @@ Applied NMF decomposition to extract latent cellular profiles: **5 profiles in b
 ## Major Biological Insights
 
 1. **Tissue Specificity Dominates:** Only 14% of aging signals are universal across tissues
-2. **Novel Biomarker Discovery:** >96% of identified genes are not in established clocks
+2. **Unique Biomarker Identification:** >96% of identified genes are not in established clocks
 3. **Divergent Regulatory Mechanisms:** Promoter-focused in blood vs. gene body-focused in brain
 4. **Nonlinear Aging Trajectory:** Epigenetic change accelerates during development
 5. **Functional Specialization:** Aging engages tissue-core pathways (neural in brain, immune in blood)
