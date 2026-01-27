@@ -200,4 +200,8 @@ This work advances epigenetic aging research by: (1) developing high-accuracy ti
 3. GEO: [GSE40279](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE40279) – Human blood methylation dataset
 4. GEO: [GSE41037](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE41037) – Human blood methylation dataset
 5. Horvath, S. (2013). DNA methylation age of human tissues and cell types. *Genome Biology*, 14, R115.
-6. Hannum, G. et al. (2013). Genome-wide methylation profiles reveal quantitative views of human aging rates. *Molecular Cell*, 49, 359–367.
+6. Hannum, G. et al. (2013). Genome-wide methylation profiles reveal quantitative views of human aging rates. *Molecular Cell*, 49, 359–367
+7. Lu, A. T., Quach, A., Wilson, J. G., Reiner, A. P., Aviv, A., Raj, K., ... & Horvath, S. (2019). DNA methylation GrimAge strongly predicts lifespan and healthspan. Aging (Albany NY), 11(2), 303–327. https://doi.org/10.18632/aging.101684.
+8. Levine, M. E. et al. (2018). An epigenetic biomarker of aging for lifespan and healthspan. Aging (Albany NY), 10(4), 573–591.
+9. Slieker, R. C. et al. (2018). Age-related accrual of methylomic variability is linked to fundamental biological pathways. Genome Biology, 19, 1–18.
+10. Rakyan, V. K. et al. (2010). Human aging-associated DNA hypermethylation occurs preferentially at bivalent chromatin domains. Genome Research, 20(4), 434–439.
