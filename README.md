@@ -1,7 +1,7 @@
 # TissueMethylome Clock (TMC): Multi-Aging Tissue Analysis
 
 ## Project Summary
-This project develops and analyzes tissue-specific epigenetic clocks using DNA methylation data from 1,657 human brain and blood samples. We built high-accuracy age predictors that reveal fundamental differences in how aging manifests across tissues, identifying novel biomarkers not captured by established epigenetic clocks. For more insight and detail on steps, outcomes, visualizations, work-in-progress analyses, and related data, see the README files in each project subfolder.
+This project develops and analyzes tissue-specific epigenetic clocks using DNA methylation data from 1,657 human brain and blood samples. We built high-accuracy age predictors that reveal fundamental differences in how aging manifests across tissues, identifying unique biomarkers not captured by established epigenetic clocks. For more insight and detail on steps, outcomes, visualizations, work-in-progress analyses, and related data, see the README files in each project subfolder.
 
 ## Project Folder Structure
 The folder structure below shows scripts, figures, and documentation for each step of the project:
@@ -129,7 +129,7 @@ Calculated epigenetic age acceleration (predicted - chronological age). Identifi
 
 ### **Step 6: Genomic Annotation**
 
-Mapped top 500 CpGs to genes: **363 unique brain genes**, **523 unique blood genes**, with only **13 genes shared**. **98.6% of brain genes and 96.6% of blood genes are novel** compared to Horvath/Hannum clocks. *Key insight: Minimal genetic overlap confirms tissue-specific aging programs.*
+Mapped top 500 CpGs to genes: **363 unique brain genes**, **523 unique blood genes**, with only **13 genes shared**. **98.6% of brain genes and 96.6% of blood genes are unique** compared to Horvath/Hannum clocks. *Key insight: Minimal genetic overlap confirms tissue-specific aging programs.*
 
 ### **Step 7: Pathway Analysis**
 
@@ -191,7 +191,7 @@ Applied NMF decomposition to extract latent cellular profiles: **5 profiles in b
 
 ## Project Significance
 
-This work advances epigenetic aging research by: (1) developing high-accuracy tissue-specific clocks, (2) revealing fundamental tissue differences in aging mechanisms, (3) identifying novel biomarkers beyond established clocks, and (4) providing a framework for deconstructing cellular contributions to aging. The findings establish a foundation for targeted interventions and precision aging assessment.
+This work advances epigenetic aging research by: (1) developing high-accuracy tissue-specific clocks, (2) revealing fundamental tissue differences in aging mechanisms, (3) identifying unique biomarkers beyond established clocks, and (4) providing a framework for deconstructing cellular contributions to aging. The findings establish a foundation for targeted interventions and precision aging assessment.
 
 ## References
 
