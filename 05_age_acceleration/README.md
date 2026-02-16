@@ -28,10 +28,10 @@ The LOWESS and piecewise models prioritize capturing localized biological shifts
 
 ---
 
-###  Developmental Stratification
+<!--  ###  Developmental Stratification
 I analyzed how the clock performs across six different life stages. 
 * **Peak Performance:** The Brain clock is most precise during the **Young Adult** stage (MAE = 6.07 years).
-* **Developmental Insights:** Accuracy varies in the **Fetal/Neonatal** and **Older Adult** stages. This is a common finding in epigenetic research, as these periods involve rapid cellular changes (development) or increased biological noise (aging), which are more complex to model than stable adulthood.
+* **Developmental Insights:** Accuracy varies in the **Fetal/Neonatal** and **Older Adult** stages. This is a common finding in epigenetic research, as these periods involve rapid cellular changes (development) or increased biological noise (aging), which are more complex to model than stable adulthood. -->
 
 ### Key Visualizations 
 ### Age Acceleration Distributions
