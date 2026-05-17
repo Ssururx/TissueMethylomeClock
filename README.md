@@ -148,9 +148,6 @@ Extracted detailed genomic features: chromosomal location, CpG island status, ge
 
 Identified **472 DMRs in blood, 350 in brain**. Found fundamental difference: **blood aging targets promoter regions** (24.5% in TSS1500), while **brain aging targets gene bodies** (32.6%). *Key insight: Divergent regulatory logic—transcriptional control in blood vs. splicing/elongation in brain.*
 
-### **Step 11: Latent Cellular Architecture**
-
-Applied NMF decomposition to extract latent cellular profiles: **5 profiles in blood** (4 age-associated), **6 profiles in brain** (3 age-associated). *Key insight: Bulk tissue aging signal decomposes into multiple cellular trajectories.* **Current WIP: Biological annotation of profiles to specific cell types.**
 
 ## Major Biological Insights
 
@@ -206,3 +203,4 @@ This work advances epigenetic aging research by: (1) developing high-accuracy ti
 8. Levine, M. E. et al. (2018). An epigenetic biomarker of aging for lifespan and healthspan. Aging (Albany NY), 10(4), 573–591.
 9. Slieker, R. C. et al. (2018). Age-related accrual of methylomic variability is linked to fundamental biological pathways. Genome Biology, 19, 1–18.
 10. Rakyan, V. K. et al. (2010). Human aging-associated DNA hypermethylation occurs preferentially at bivalent chromatin domains. Genome Research, 20(4), 434–439.
+...
