@@ -10,7 +10,6 @@ Implementation Notes:
 - Uses scikit-learn PCA for dimensionality reduction
 - Uses scipy for statistical calculations
 - Custom functions for file handling and quality control
-- And more...
 """
 
 # ----------------------------------------------------------------------------
