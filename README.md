@@ -151,41 +151,41 @@ Identified **472 DMRs in blood, 350 in brain**. Found fundamental difference: **
 
 ## Major Biological Insights
 
-1. **Tissue Specificity Dominates:** Only 14% of aging signals are universal across tissues
-2. **Unique Biomarker Identification:** >96% of identified genes are not in established clocks
-3. **Divergent Regulatory Mechanisms:** Promoter-focused in blood vs. gene body-focused in brain
-4. **Nonlinear Aging Trajectory:** Epigenetic change accelerates during development
-5. **Functional Specialization:** Aging engages tissue-core pathways (neural in brain, immune in blood)
+1. Tissue Specificity Dominates: Only 14% of aging signals are universal across tissues
+2. Unique Biomarker Identification: >96% of identified genes are not in established clocks
+3. Divergent Regulatory Mechanisms: Promoter-focused in blood vs. gene body-focused in brain
+4. Nonlinear Aging Trajectory: Epigenetic change accelerates during development
+5. Functional Specialization: Aging engages tissue-core pathways (neural in brain, immune in blood)
 
 ## Immediate Next Steps & Future Directions
 
 ### **Current Work in Progress:**
 
-* **Biological annotation of Latent Cellular Profiles** using cell-type-specific methylation databases (PanglaoDB, Allen Brain Atlas)
-* **Causal mediation analysis** to quantify clock signal attribution: cellular composition vs. intracellular drift
-* **Gender analysis** pending metadata extraction from GSE40279
+* Biological annotation of Latent Cellular Profiles using cell-type-specific methylation databases (PanglaoDB, Allen Brain Atlas)
+* Causal mediation analysis to quantify clock signal attribution: cellular composition vs. intracellular drift
+* Gender analysis pending metadata extraction from GSE40279
 
 ### **Planned Future Investigations:**
 
 **3. Integrated Multi-Omics and Phenotypic Correlation:**
 
-* **Longitudinal trajectory modeling** using available blood DNAm data to predict later-life brain epigenetic aging
-* **Clinical correlation analysis** with Lothian Birth Cohort 1936 data: cognitive decline, lifestyle factors, inflammatory markers, neuropathology
-* **Differential association testing** to identify factors with tissue-specific aging effects
-* **Blood-brain barrier investigation** of age-related DMR genes for neuroinflammation links
+* Longitudinal trajectory modeling using available blood DNAm data to predict later-life brain epigenetic aging
+* Clinical correlation analysis with Lothian Birth Cohort 1936 data: cognitive decline, lifestyle factors, inflammatory markers, neuropathology
+* Differential association testing to identify factors with tissue-specific aging effects
+* Blood-brain barrier investigation of age-related DMR genes for neuroinflammation links
 
 **4. Causality and Predictive Utility:**
 
-* **Causal inference modeling** using Mendelian randomization
-* **Predictive modeling** for cognitive decline and neurodegenerative pathology
-* **Utility demonstration** comparing predictive power against general epigenetic clocks
+* Causal inference modeling using Mendelian randomization
+* Predictive modeling for cognitive decline and neurodegenerative pathology
+  *Utility demonstration comparing predictive power against general epigenetic clocks
 
 ## Technical Implementation Highlights
 
-* **Machine Learning:** ElasticNet regression with Bagging ensemble (30-50 estimators)
-* **Statistical Validation:** Bootstrap resampling, permutation testing, 5-fold cross-validation
-* **Bioinformatics:** g:Profiler pathway analysis, Illumina HM450 annotation, custom TSI framework
-* **Visualization:** Comprehensive dashboards for LAP analysis, genomic context distributions
+* Machine Learning: ElasticNet regression with Bagging ensemble (30-50 estimators)
+* Statistical Validation: Bootstrap resampling, permutation testing, 5-fold cross-validation
+* Bioinformatics: g:Profiler pathway analysis, Illumina HM450 annotation, custom TSI framework
+* Visualization: Comprehensive dashboards for LAP analysis, genomic context distributions
 
 ## Project Significance
 
@@ -203,4 +203,4 @@ This work advances epigenetic aging research by: (1) developing high-accuracy ti
 8. Levine, M. E. et al. (2018). An epigenetic biomarker of aging for lifespan and healthspan. Aging (Albany NY), 10(4), 573–591.
 9. Slieker, R. C. et al. (2018). Age-related accrual of methylomic variability is linked to fundamental biological pathways. Genome Biology, 19, 1–18.
 10. Rakyan, V. K. et al. (2010). Human aging-associated DNA hypermethylation occurs preferentially at bivalent chromatin domains. Genome Research, 20(4), 434–439.
-...
+* ...
