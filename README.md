@@ -110,43 +110,43 @@ README.md
 
 ### **Step 1: Data Acquisition & Preprocessing**
 
-Downloaded and integrated four GEO datasets. Standardized age to decimal years, filtered for healthy controls only, and merged three blood studies into a unified cohort of 1,322 samples. *Key insight: Established a clean, well-annotated foundation from heterogeneous sources.*
+Downloaded and integrated four GEO datasets. Standardized age to decimal years, filtered for healthy controls only, and merged three blood studies into a unified cohort of 1,322 samples. Main Finding: Established a clean, well-annotated foundation from heterogeneous sources.
 
 ### **Step 2: Quality Control & Exploration**
 
-Implemented rigorous QC: removed samples with >5% missing values, verified beta-value ranges (0-1), and filtered 2 low-quality blood samples. PCA confirmed clear tissue separation. *Key insight: Data integrity validated with minimal missing values (0.09% blood, 0% brain).*
+Implemented rigorous QC: removed samples with >5% missing values, verified beta-value ranges (0-1), and filtered 2 low-quality blood samples. PCA confirmed clear tissue separation. Main Finding: Data integrity validated with minimal missing values (0.09% blood, 0% brain).
 
 ### **Step 3: Feature Discovery & Tissue Specificity**
 
-Identified top age-associated CpGs: **38,707 significant in brain** (top r=0.936), **1,450 in blood** (top r=0.740). Developed Tissue Specificity Index (TSI) analyzing 250 shared CpGs: **60% tissue-locked**, **14% universal**, **26% intermediate**. *Key insight: Aging is predominantly tissue-specific, with minimal conserved signals.*
+Identified top age-associated CpGs: **38,707 significant in brain** (top r=0.936), **1,450 in blood** (top r=0.740). Developed Tissue Specificity Index (TSI) analyzing 250 shared CpGs: **60% tissue-locked**, **14% universal**, **26% intermediate**. Main Finding: Aging is predominantly tissue-specific, with minimal conserved signals.
 
 ### **Step 4: Model Training & Optimization**
 
-Built ElasticNet + Bagging ensemble models. Brain model uses **174 stable CpGs** achieving r=0.985; blood model uses **500 CpGs** achieving r=0.927. *Key insight: Brain's superior performance stems from stronger individual CpG-age correlations allowing more compact feature sets.*
+Built ElasticNet + Bagging ensemble models. Brain model uses **174 stable CpGs** achieving r=0.985; blood model uses **500 CpGs** achieving r=0.927. Main Finding: Brain's superior performance stems from stronger individual CpG-age correlations allowing more compact feature sets.
 
 ### **Step 5: Age Acceleration & Nonlinear Dynamics**
 
-Calculated epigenetic age acceleration (predicted - chronological age). Identified **slow, normal, and fast agers** via clustering. Nonlinear analysis revealed **accelerated epigenetic aging during development**, with inflection points around age 13. *Key insight: Epigenetic aging rate varies across lifespan, fastest during early development.*
+Calculated epigenetic age acceleration (predicted - chronological age). Identified **slow, normal, and fast agers** via clustering. Nonlinear analysis revealed **accelerated epigenetic aging during development**, with inflection points around age 13. Main Finding: Epigenetic aging rate varies across lifespan, fastest during early development.
 
 ### **Step 6: Genomic Annotation**
 
-Mapped top 500 CpGs to genes: **363 unique brain genes**, **523 unique blood genes**, with only **13 genes shared**. **98.6% of brain genes and 96.6% of blood genes are unique** compared to Horvath/Hannum clocks. *Key insight: Minimal genetic overlap confirms tissue-specific aging programs.*
+Mapped top 500 CpGs to genes: **363 unique brain genes**, **523 unique blood genes**, with only **13 genes shared**. **98.6% of brain genes and 96.6% of blood genes are unique** compared to Horvath/Hannum clocks. Main Finding: Minimal genetic overlap confirms tissue-specific aging programs.
 
 ### **Step 7: Pathway Analysis**
 
-Brain genes enriched for **synaptic signaling and neuronal development**. Blood genes enriched for **immune response and inflammatory pathways**. *Key insight: Aging engages tissue-core functions: neural communication in brain, immune regulation in blood.*
+Brain genes enriched for **synaptic signaling and neuronal development**. Blood genes enriched for **immune response and inflammatory pathways**. Main Finding: Aging engages tissue-core functions: neural communication in brain, immune regulation in blood.
 
 ### **Step 8: Statistical Validation**
 
-Passed rigorous bootstrap (500 iterations) and permutation testing (500 shuffles). Final correlations: **brain r=0.987, blood r=0.933** (p < 1e-100). *Key insight: Models capture genuine biological signal, not data artifacts.*
+Passed rigorous bootstrap (500 iterations) and permutation testing (500 shuffles). Final correlations: **brain r=0.987, blood r=0.933** (p < 1e-100). Main Finding: Models capture genuine biological signal, not data artifacts.
 
 ### **Step 9: Comprehensive Genomic Context**
 
-Extracted detailed genomic features: chromosomal location, CpG island status, gene region. **Chromosomes 1 and 19** show highest density of aging markers. Created streamlined datasets for top 500 CpGs. *Key insight: Aging-associated CpGs distribute non-randomly across genome.*
+Extracted detailed genomic features: chromosomal location, CpG island status, gene region. **Chromosomes 1 and 19** show highest density of aging markers. Created streamlined datasets for top 500 CpGs. Main Finding: Aging-associated CpGs distribute non-randomly across genome.
 
 ### **Step 10: DMR & Comparative Analysis**
 
-Identified **472 DMRs in blood, 350 in brain**. Found fundamental difference: **blood aging targets promoter regions** (24.5% in TSS1500), while **brain aging targets gene bodies** (32.6%). *Key insight: Divergent regulatory logic—transcriptional control in blood vs. splicing/elongation in brain.*
+Identified **472 DMRs in blood, 350 in brain**. Found fundamental difference: **blood aging targets promoter regions** (24.5% in TSS1500), while **brain aging targets gene bodies** (32.6%). Main Finding: Divergent regulatory logic—transcriptional control in blood vs. splicing/elongation in brain.
 
 
 ## Major Biological Insights
