@@ -93,7 +93,7 @@ LICENSE
 README.md
 ```
 
-## Key Results at a Glance
+## Key Results 
 
 **Model Performance:**
 
@@ -165,6 +165,8 @@ Identified **472 DMRs in blood, 350 in brain**. Found fundamental difference: **
 * Causal mediation analysis to quantify clock signal attribution: cellular composition vs. intracellular drift
 * Gender analysis pending metadata extraction from GSE40279
 
+```
+
 ### **Planned Future Investigations:**
 
 **3. Integrated Multi-Omics and Phenotypic Correlation:**
@@ -180,12 +182,14 @@ Identified **472 DMRs in blood, 350 in brain**. Found fundamental difference: **
 * Predictive modeling for cognitive decline and neurodegenerative pathology
   *Utility demonstration comparing predictive power against general epigenetic clocks
 
+
 ## Technical Implementation Highlights
 
 * Machine Learning: ElasticNet regression with Bagging ensemble (30-50 estimators)
 * Statistical Validation: Bootstrap resampling, permutation testing, 5-fold cross-validation
 * Bioinformatics: g:Profiler pathway analysis, Illumina HM450 annotation, custom TSI framework
 * Visualization: Comprehensive dashboards for LAP analysis, genomic context distributions
+```
 
 ## Project Significance
 
