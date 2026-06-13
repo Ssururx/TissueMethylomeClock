@@ -156,6 +156,7 @@ Identified **472 DMRs in blood, 350 in brain**. Found fundamental difference: **
 3. Divergent Regulatory Mechanisms: Promoter-focused in blood vs. gene body-focused in brain
 4. Nonlinear Aging Trajectory: Epigenetic change accelerates during development
 5. Functional Specialization: Aging engages tissue-core pathways (neural in brain, immune in blood)
+   
 
 ## Immediate Next Steps & Future Directions
 
