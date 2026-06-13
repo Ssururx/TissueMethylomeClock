@@ -165,7 +165,7 @@ Identified **472 DMRs in blood, 350 in brain**. Found fundamental difference: **
 * Causal mediation analysis to quantify clock signal attribution: cellular composition vs. intracellular drift
 * Gender analysis pending metadata extraction from GSE40279
 
-```
+<!-- 
 
 ### **Planned Future Investigations:**
 
@@ -189,7 +189,7 @@ Identified **472 DMRs in blood, 350 in brain**. Found fundamental difference: **
 * Statistical Validation: Bootstrap resampling, permutation testing, 5-fold cross-validation
 * Bioinformatics: g:Profiler pathway analysis, Illumina HM450 annotation, custom TSI framework
 * Visualization: Comprehensive dashboards for LAP analysis, genomic context distributions
-```
+-->
 
 ## Project Significance
 
