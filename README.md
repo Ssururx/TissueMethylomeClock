@@ -160,11 +160,11 @@ Identified **472 DMRs in blood, 350 in brain**. Found fundamental difference: **
 
 ## Immediate Next Steps & Future Directions
 
-### **Current Work in Progress:**
-
-* Biological annotation of Latent Cellular Profiles using cell-type-specific methylation databases (PanglaoDB, Allen Brain Atlas)
-* Causal mediation analysis to quantify clock signal attribution: cellular composition vs. intracellular drift
-* Gender analysis pending metadata extraction from GSE40279
+### Current Work in Progress:
+- Step 5: Age acceleration analysis. Calculating predicted minus chronological age. Identifying slow, normal, and fast agers via clustering. Nonlinear analysis to detect inflection points in aging trajectories.
+- Biological annotation of Latent Cellular Profiles using cell-type-specific methylation databases (PanglaoDB, Allen Brain Atlas)
+- Causal mediation analysis to quantify clock signal attribution: cellular composition vs. intracellular drift
+- Gender analysis pending metadata extraction from GSE40279
 
 <!-- 
 
