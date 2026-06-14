@@ -42,7 +42,7 @@ The folder structure below shows scripts, figures, and documentation for each st
 ├── blood_clock.py
 └── brain_clock.py
 
-05_age_acceleration
+* Part 5 of the project is a work in progress. Below is what the completed folder might look like in the future.
 ├── README.md
 ├── figures
 │   ├── age_acceleration_distributions.jpeg
