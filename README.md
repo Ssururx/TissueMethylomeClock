@@ -124,9 +124,9 @@ Identified top age-associated CpGs: **38,707 significant in brain** (top r=0.936
 
 Built ElasticNet + Bagging ensemble models. Brain model uses **174 stable CpGs** achieving r=0.985; blood model uses **500 CpGs** achieving r=0.927. The stronger CpG-age correlations observed in brain tissue likely explain why the brain clock achieved higher accuracy with a smaller feature set.
 
-### **Step 5: Age Acceleration & Nonlinear Dynamics**
+### Step 5: Age Acceleration & Nonlinear Dynamics (Work in Progress)
 
-Calculated epigenetic age acceleration (predicted - chronological age). Identified **slow, normal, and fast agers** via clustering. Nonlinear analysis revealed **accelerated epigenetic aging during development**, with inflection points around age 13. This shows that epigenetic aging rate varies across lifespan and is fastest during early development.
+This step is currently in progress. The planned analysis will calculate epigenetic age acceleration (predicted minus chronological age), identify slow, normal, and fast agers via clustering, and perform nonlinear analysis to detect inflection points in aging trajectories. The folder structure below shows what the completed step may look like.
 
 ### **Step 6: Genomic Annotation**
 
